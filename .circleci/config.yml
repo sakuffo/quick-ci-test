@@ -9,7 +9,7 @@ commands:
         default: World
     steps:
       - run: echo "Hello << parameters.to >>"
-      - run: pwd; echo "That is the current working directory"
+      - run: pwd; echo "That is the current working directory!"
   print_pipeline_id:
     description: "Printing the pipeline id"
     parameters:
