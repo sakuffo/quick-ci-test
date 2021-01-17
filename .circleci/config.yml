@@ -7,12 +7,12 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "!!!Hello to the world of CI/CD!!!" > /tmp/workspace/output.txt
-      - run: cat /tmp/workspace/output.txt
+      - run: echo "!!!Hello to the world of CI/CD!!!" > output.txt
+      - run: cat output.txt
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - /tmp/workspace/
   print_hello_file:
     docker:
       - image: circleci/node:13.8.0
@@ -20,7 +20,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: cat /tmp/workspace/output.txt  
+      - run: ls           
+      - run: cat output.txt  
 
 workflows:
   # Name the workflow "welcome"
