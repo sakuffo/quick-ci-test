@@ -13,9 +13,6 @@ commands:
     description: "command will cause a fail by returning 1"
     steps:
       - run: return 1
-  fail_intentional:
-    description: "check to see if we failed on purpose"
-    steps:
       - run:
           command: echo "Yes we did that."
           when: on_fail
@@ -38,10 +35,6 @@ jobs:
     steps:
       - checkout
       - fail_test
-      - when:
-          condition: on_fail
-          steps:
-            - run: echo "my custom"
 
 workflows:
   do_the_output_thing:
