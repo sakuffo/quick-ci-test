@@ -18,7 +18,7 @@ commands:
         type: string
         default: << pipeline.id >>
     steps:
-      - run: echo "This is pipeline ID << parameters.to >>
+      - run: echo "This is pipeline ID << parameters.pl_id >>
 
 defaults: &defaults
   docker:
@@ -26,7 +26,7 @@ defaults: &defaults
   working_directory: ~/projects
 
 jobs:
-  save_hello_world_output:
+  greetings_and_info:
     <<: *defaults
     steps:
       - checkout
@@ -38,5 +38,5 @@ jobs:
 workflows:
   do_the_output_thing:
     jobs:
-      - save_hello_world_output
+      - greetings_and_info
 
