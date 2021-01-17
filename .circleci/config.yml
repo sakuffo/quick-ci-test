@@ -8,18 +8,20 @@ orbs:
 jobs:
   save_hello_world_output:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "Welcome to the fun world of CI/CD" > /tmp/workspace/output.txt
+      - run: echo "hello" > output.txt
       - persist_to_workspace:
-        root: /tmp/workspace
-        paths:
-          - output.txt
+          root: .
+          paths:
+            - .
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+  save_hello_world_output:
+    jobs:
       - save_hello_world_output
