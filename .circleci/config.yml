@@ -29,8 +29,8 @@ workflows:
   # Name the workflow "welcome"
   do_the_output_thing:
     jobs:
-      # - save_hello_world_output
-      # - print_hello_file:
-      #     requires:
-      #       - save_hello_world_output
+      - save_hello_world_output
+      - print_hello_file:
+          requires:
+            - save_hello_world_output
 
