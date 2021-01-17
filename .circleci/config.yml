@@ -1,15 +1,6 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 commands:
-  saying_hello_to_the_world:
-    description: "Say hello and seeing if jobs will run"
-    parameters:
-      to:
-        type: string
-        default: World
-    steps:
-      - run: echo "Hello << parameters.to >>"
-      - run: pwd; echo "That is the current working directory!"
   print_pipeline_id:
     description: "Printing the pipeline id"
     parameters:
@@ -18,6 +9,17 @@ commands:
         default: << pipeline.id >>
     steps:
       - run: echo "This is pipeline ID -- << parameters.pl_id >>"
+  fail_test:
+    description: "command will cause a fail by returning 1"
+    steps:
+      - run: return 1
+  fail_intentional:
+    description: "check to see if we failed on purpose"
+    steps:
+      - run:
+          command: echo "Yes we did that."
+          when: on_fail
+
 
 defaults: &defaults
   docker:
@@ -25,17 +27,24 @@ defaults: &defaults
   working_directory: ~/projects
 
 jobs:
-  greetings_and_info:
+  pipline_info:
     <<: *defaults
     steps:
       - checkout
-      - saying_hello_to_the_world:
-          to: Stephen
       - print_pipeline_id:
           pl_id: << pipeline.id >>
+  will_fail:
+    <<: *defaults
+    steps:
+      - checkout
+      - fail_test
+      - when:
+          condition: on_fail
+          steps:
+            - run: echo "my custom"
 
 workflows:
   do_the_output_thing:
     jobs:
-      - greetings_and_info
+      - will_fail
 
