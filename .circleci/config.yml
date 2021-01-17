@@ -19,6 +19,7 @@ commands:
         default: << pipeline.id >>
     steps:
       - run: echo "This is pipeline ID << parameters.pl_id >>"
+      - run: echo << pipeline.id >>
 
 defaults: &defaults
   docker:
