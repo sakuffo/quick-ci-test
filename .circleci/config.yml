@@ -18,8 +18,7 @@ commands:
         type: string
         default: << pipeline.id >>
     steps:
-      - run: echo "This is pipeline ID << parameters.pl_id >>"
-      - run: echo << pipeline.id >>
+      - run: echo 'This is pipeline ID\: << parameters.pl_id >>'
 
 defaults: &defaults
   docker:
@@ -32,7 +31,7 @@ jobs:
     steps:
       - checkout
       - saying_hello_to_the_world:
-          to: "Stephen"
+          to: Stephen
       - print_pipeline_id:
           pl_id: << pipeline.id >>
 
