@@ -7,7 +7,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "!!!Hello to the world of CI/CD!!!" > output.txt
+      - run: echo "!!!Hello to the world of CI/CD!!!" > /tmp/workspace/output.txt
+      - run: cat /tmp/workspace/output.txt
       - persist_to_workspace:
           root: .
           paths:
@@ -19,7 +20,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: cat ./output.txt  
+      - run: cat /tmp/workspace/output.txt  
 
 workflows:
   # Name the workflow "welcome"
