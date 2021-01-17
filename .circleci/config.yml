@@ -6,7 +6,7 @@ commands:
     parameters:
       to:
         type: string
-        default: "World"
+        default: World
     steps:
       - run: echo "Hello << parameters.to >>"
       - run: pwd
